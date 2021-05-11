@@ -22,6 +22,34 @@ class ChpwdForm(PasswordChangeForm):
 		class Meta:
 			model=User
 			fields=['oldpassword','newpassword','confirmpassword']
+			
+			
+class UsPerm(forms.ModelForm):
+	class Meta:
+		model=User
+		fields=["username","role"]
+		widgets={
+		"username":forms.TextInput(attrs={
+			"class":"form-control",
+			"readOnly":True,
+			}),
+		"role":forms.Select(attrs={
+			"class":"form-control",
+			}),
+		}
+
+# class RequestForm(forms.ModelForm):
+# 	class Meta:
+# 		model=MedicineInfo
+# 		fields=["organization_name","medicine_name","category","quantity","batch_no"]
+# 		widgets={
+# 		"organizations_name":forms.TextInput(attrs={"class":"form-control","placeholder":"Enter pharmacy name"}),
+# 		"medicine_name":forms.TextInput(attrs={"class":"form-control","placeholder":"Medicine name"}),
+# 		"quantity":forms.TextInput(attrs={"class":"form-control","placeholder":"Enter Quantity"}),
+# 		"batch_no":forms.TextInput(attrs={"class":"form-control","placeholder":"Enter Batch number"}),
+# 		"category":forms.TextInput(attrs={"class":"form-control","placeholder":"Enter category"}),
+# 		}				
+
 
 class ImForm(forms.ModelForm):
 	class Meta:
@@ -68,7 +96,7 @@ class OrgForm(forms.ModelForm):
 class Medform(forms.ModelForm):
 	class Meta:
 		model=MedicineInfo
-		fields=['pharmacy_name','medicine_name','quantity','batch_no','category','production_date','entry_date','expiry_date']
+		fields=['pharmacy_name','medicine_name','quantity','batch_no','category','production_date','entry_date','expiry_date','impf']
 		widgets={
 		"pharmacy_name":forms.TextInput(attrs={"class":"form-control","placeholder":"Enter pharmacy name"}),
 		"medicine_name":forms.TextInput(attrs={"class":"form-control","placeholder":"Medicine name"}),
@@ -84,7 +112,7 @@ class Medform(forms.ModelForm):
 class ServiceForm(forms.ModelForm):
 	class Meta:
 		model=ServiceBox
-		fields=["name","email","change_role","img"]
+		fields=["name","email","change_role","impf"]
 		widgets={
 		"name":forms.TextInput(attrs={"class":"form-control","placeholder":"UserName",}),
 		"email":forms.TextInput(attrs={"class":"form-control","placeholder":"email"}),

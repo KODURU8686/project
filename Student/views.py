@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
-from Student.forms import UsForm,ChpwdForm,Medform,ImForm,GuestForm,ServiceForm,OrgForm,DonationForm
+from Student.forms import UsForm,ChpwdForm,Medform,ImForm,GuestForm,ServiceForm,OrgForm,DonationForm,UsPerm
 from django.contrib import messages
-from Student.models import MedicineInfo,DonationInfo,AbstractUser
+from Student.models import MedicineInfo,DonationInfo,AbstractUser,User
 from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
 from Project import settings
@@ -17,6 +17,10 @@ def HomePage(rt):
 def about(request):
 	return render(request,'htfiles/about.html')
 
+def mainpage(request):
+	mdl = MedicineInfo.objects.filter(uid_id=request.user.id)
+	return render(request,'htfiles/mainpage.html',{'t':mdl})	
+
 # def registration(fh):
 # 	if fh.method=="POST":
 # 		d=Reg(fh.POST)
@@ -26,6 +30,16 @@ def about(request):
 # 			return redirect('/login')
 # 	d=Reg()
 # 	return render(fh,'htfiles/registration.html',{'t':d})
+
+# def ref(request):
+# 	if request.method=="POST":
+# 		t=RequestForm(request.POST)
+# 		if t.is_valid():
+# 			t.save()
+# 			print(t)
+# 		return redirect('inx')
+# 	t.save()		
+# 	return render(req,'htfiles/request.html',{'r':t})
 
 def registration1(fh):
 	if fh.method=="POST":
@@ -150,20 +164,35 @@ def userupdate(up,si):
 def view(request):
 	return render(request,'htfiles/view.html')
 
-def service(req):
-	if req.method=="POST":
-		data=ServiceForm(req.POST)
-		if data.is_valid():
-			subject=' successfully changed role!!'
-			body="Your role has been successfully changed to "   +req.POST['change_role'] 
-			receiver=req.POST['email']
-			sender=settings.EMAIL_HOST_USER
-			send_mail(subject,body,sender,[receiver])
-			data.save()
-			messages.success(req,"Successfully sent to your mail "+receiver)
-			return redirect('/')
-	data=ServiceForm()
-	return render(req,'htfiles/service.html',{'c':data})
+# def adminpermission(req):
+# 	if req.method=="POST":
+# 		data=ServiceForm(req.POST)
+# 		if data.is_valid():
+# 			subject=' successfully changed role!!'
+# 			body="Your role has been successfully changed to "   +req.POST['change_role'] 
+# 			receiver=req.POST['email']
+# 			sender=settings.EMAIL_HOST_USER
+# 			send_mail(subject,body,sender,[receiver])
+# 			data.save()
+# 			messages.success(req,"Successfully sent to your mail "+receiver)
+# 			return redirect('/')
+# 	data=ServiceForm()
+# 	return render(req,'htfiles/adminpermission.html',{'c':data})
+
+def gvper(request,k):
+	r = User.objects.get(id=k)
+	if request.method == "POST":
+		k = UsPerm(request.POST,instance=r)
+		if k.is_valid():
+			k.save()
+			return redirect('/prm')
+	k = UsPerm(instance=r)
+	return render(request,'htfiles/gvp.html',{'y':k})
+
+
+def peruser(request):
+	ty=User.objects.all()
+	return render(request,'htfiles/peruser.html',{'q':ty})
 
 # def donationinfo(request):
 # 	if request.method=="POST":

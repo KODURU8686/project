@@ -8,6 +8,7 @@ urlpatterns=[
 	path('lgo/',v.LogoutView.as_view(template_name='htfiles/logout.html'),name="logo"),
 	# path('registration/',views.registration,name="reg"),
 	path('registration1/',views.registration1,name="nreg"),
+	path('mn/',views.mainpage,name="mnp"),
 	path('donate/',views.donate,name="don"),
 	path('org/',views.organization,name="og"),
 	path('chpwd/',views.cgf,name="cg"),
@@ -26,7 +27,9 @@ urlpatterns=[
 	path('e/<int:si>/',views.userupdate,name="ue"),
 	#path('ui/<str:uname>/',views.userinfo,name="uin"),
 	path('view/',views.view,name="vi"),
-	path('ser/',views.service,name='ser'),
+	path('eper/<int:k>/',views.gvper,name="gp"),
+	path('prm/',views.peruser,name="pmu"),
+	
 	# path('doninfo/',views.donationinfo,name="do"),
 	# path('sh1/',views.showdata,name="sh"),
 	path('index/',views.index1,name="inx"),
