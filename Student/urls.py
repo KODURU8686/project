@@ -29,10 +29,12 @@ urlpatterns=[
 	path('view/',views.view,name="vi"),
 	path('eper/<int:k>/',views.gvper,name="gp"),
 	path('prm/',views.peruser,name="pmu"),
-	
+
+
 	# path('doninfo/',views.donationinfo,name="do"),
 	# path('sh1/',views.showdata,name="sh"),
 	path('index/',views.index1,name="inx"),
-	path('rc/',views.rolechange,name="rc"),
-	path('about',views.about,name="ab")
+	# path('rc/',views.rolechange,name="rc"),
+	path('about/',views.about,name="ab"),
+	path('rq/',views.requ,name="rqt")
 ]

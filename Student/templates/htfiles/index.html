@@ -13,6 +13,7 @@
 					<th>Production date</th>
 					<th>Entry date</th>
 					<th>Expiry date</th>
+					<th>Remaining days</th>
 					<!-- <th>{{k.medicine_name}}</th>
 					<th>{{k.quantity}}</th>
 					<th>{{k.batch_no}}</th>
@@ -59,9 +60,10 @@
 					<td>{{k.6}}</td>
 					<td>{{k.7}}</td>
 					<td>{{k.8}}</td>
+					<td>{{k.9}}</td>
 					<!-- <td><a class="btn btn-primary mx-1" href="#">Edit</a><a class="btn btn-danger mx-1" href="#">Delete</a></td> -->
 					<td><h6>{% if k.2 == 0 %}<span class="bg-success text-light p-1 border rounded">Available</span>{% else %}<span class="btn btn-warning text-light border rounded p-1">Out of Stock</span>{% endif%}</span></h6></td>
-					<td><a href="#" class="bg-primary text-light p-1 border rounded btn btn-block mx-auto">Request</a></td>
+					<td><a href="{% url 'rqt' %}" class="bg-primary text-light p-1 border rounded btn btn-block mx-auto">Request</a></td>
 					</tr>
 				
 				{% endfor %}

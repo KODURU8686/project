@@ -38,6 +38,7 @@ class UsPerm(forms.ModelForm):
 			}),
 		}
 
+
 # class RequestForm(forms.ModelForm):
 # 	class Meta:
 # 		model=MedicineInfo
@@ -48,7 +49,8 @@ class UsPerm(forms.ModelForm):
 # 		"quantity":forms.TextInput(attrs={"class":"form-control","placeholder":"Enter Quantity"}),
 # 		"batch_no":forms.TextInput(attrs={"class":"form-control","placeholder":"Enter Batch number"}),
 # 		"category":forms.TextInput(attrs={"class":"form-control","placeholder":"Enter category"}),
-# 		}				
+# 		}	
+	
 
 
 class ImForm(forms.ModelForm):
@@ -133,12 +135,15 @@ class DonationForm(forms.ModelForm):
 		}
 
 
-class AdminForm(forms.ModelForm):
+class RequestForm(forms.ModelForm):
 	class Meta:
-		model=User
-		fields=['username','email','role']
+		model=MedicineInfo
+		fields=['pharmacy_name','medicine_name','quantity','batch_no','category','production_date','entry_date','expiry_date','impf']
 		widgets={
-		"username":forms.TextInput(attrs={"class":"form-control","placeholder":"Enter Username"}),
-		"email":forms.TextInput(attrs={"class":"form-control","placeholder":"Enter email"}),
-		"role":forms.Select(attrs={"class":"form-control","placeholder":"select your role"}),
+		"pharmacy_name":forms.TextInput(attrs={"class":"form-control","placeholder":"Enter pharmacy name"}),
+		"medicine_name":forms.TextInput(attrs={"class":"form-control","placeholder":"Medicine name"}),
+		"quantity":forms.TextInput(attrs={"class":"form-control","placeholder":"Enter Quantity"}),
+		"batch_no":forms.TextInput(attrs={"class":"form-control","placeholder":"Enter Batch number"}),
+		"category":forms.TextInput(attrs={"class":"form-control","placeholder":"Enter category"}),
+		"production_date":forms.TextInput(attrs={"class":"form-control","placeholder":"YYYY-MM-DD"}),
 		}

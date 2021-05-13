@@ -1,10 +1,12 @@
 from django.shortcuts import render,redirect
-from Student.forms import UsForm,ChpwdForm,Medform,ImForm,GuestForm,ServiceForm,OrgForm,DonationForm,UsPerm
+from Student.forms import UsForm,ChpwdForm,Medform,ImForm,GuestForm,ServiceForm,OrgForm,DonationForm,UsPerm,RequestForm
 from django.contrib import messages
 from Student.models import MedicineInfo,DonationInfo,AbstractUser,User
 from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
 from Project import settings
+from datetime import date
+
 
 # Create your views here.
 def management(request):
@@ -211,12 +213,32 @@ def index1(request):
 	g = MedicineInfo.objects.all()
 	k = {}
 	for m in g:
+		days_count=m.expiry_date-m.created_date
 		#s = User.objects.get(id=m.uid_id)
-		k[m.id] = m.id,m.pharmacy_name,m.medicine_name,m.quantity,m.batch_no,m.category,m.production_date,m.entry_date,m.expiry_date
+		k[m.id] = m.id,m.pharmacy_name,m.medicine_name,m.quantity,m.batch_no,m.category,m.production_date,m.entry_date,m.expiry_date,days_count
 	f = k.values()
 	return render(request,'htfiles/index.html',{'it':i,'d':f})
+	# m.entry_date=date(2008,8,18)
+	# m.expiry_date=data(2008,9,26)
+	# delta=m.entry_date - m.expiry_date
+	# print(delta.days)
 
-def rolechange(request):
-	if method=="POST":
-		data=AdminForm.objects.all()
-		return render(request,'htfiles/rolechange.html')
+
+# def rolechange(request):
+# 	r=User.objects.get(k=id)
+# 	if request.method=="POST":
+# 		k = RequestForm(request.POST,instance=r)
+# 		if k.is_valid():
+# 			k.save()
+# 		return redirect('/rc')
+# 	k = RequestForm(instance=r)
+# 	return render(request,'htfiles/mainpage.html',{'y':k})
+
+def requ(request):
+	if request.method=="POST":
+		g=RequestForm(request.POST)
+		if g.is_valid():
+			g.save()
+		return redirect('/rq/')
+	g=RequestForm()
+	return render(request,'htfiles/index.html',{'r':g})		

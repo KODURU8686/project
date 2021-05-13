@@ -15,7 +15,7 @@ class User(AbstractUser):
 	role = models.IntegerField(default=3,choices=t)
 	g=[('M',"Male"),('F','Female')]
 	age=models.IntegerField(default=10)
-	impf=models.ImageField(upload_to='Medicines/',default="Ngo1.jpg")
+	impf=models.ImageField(upload_to='Medicines/',default="ngo1.jpg")
 	gender=models.CharField(max_length=10,choices=g,default="F")
 	organization_name=models.CharField(max_length=120,default="ngo")
 	hospital_name=models.CharField(max_length=120,default="ap")
@@ -33,6 +33,8 @@ class MedicineInfo(models.Model):
 	production_date=models.DateField()
 	entry_date=models.DateField()
 	expiry_date=models.DateField()
+	created_date=models.DateField(auto_now=True)
+	days_count=models.DateField(null=True)
 	uid=models.ForeignKey(User,on_delete=models.CASCADE)
 	impf=models.ImageField(upload_to='Medicines/',default="ngo1.jpg")
 
